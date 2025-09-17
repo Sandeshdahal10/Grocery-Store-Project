@@ -33,10 +33,24 @@ export const productList = async (req, res) => {
 
 //Get Product by id : /api/product/id
 export const productById = async (req, res) => {
-
+  try {
+    const {id} = req.body;
+    const product = await Product.findById(id);
+    res.json({success: true, product})
+  } catch (error) {
+    console.log(error);
+    res.json({success: false, message: error.message});
+  }
 }
 //Change Product insStock : /api/product/stock
 export const changeStock = async (req, res) => {
-
+  try {
+    const {id, inStock} = req.body;
+    await Product.findByIdAndUpdate(id, {inStock});
+    res.json({success: true, message: "Product stock updated successfully"});
+  } catch (error) {
+    console.log(error);
+    res.json({success: false, message: error.message});
+  }
 }
 
