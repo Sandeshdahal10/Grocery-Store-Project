@@ -1,3 +1,16 @@
+/**
+ * Navbar Component
+ * 
+ * Renders a responsive navigation bar with:
+ * - Logo and home link
+ * - Desktop menu with navigation links, search bar, and cart icon
+ * - Mobile menu with hamburger toggle
+ * - User authentication UI (Login/Logout)
+ * - User profile dropdown with order history
+ * 
+ * @component
+ * @returns {JSX.Element} The rendered navbar
+ */
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { assets } from "../assets/assets";
@@ -7,6 +20,10 @@ const Navbar = () => {
   const [open, setOpen] = React.useState(false);
   const { user, setUser, setShowUserLogin, navigate } = useAppContext();
 
+  /**
+   * Handles user logout by clearing user data and navigating to home
+   * @async
+   */
   const logout = async () => {
     setUser(null);
     navigate("/");
