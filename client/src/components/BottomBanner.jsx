@@ -1,6 +1,20 @@
 import React from "react";
 import { assets, features } from "../assets/assets";
 
+/**
+ * BottomBanner
+ *
+ * Functional React component that renders the bottom banner section.
+ *
+ * Behavior:
+ * - Uses exported `assets` for responsive banner images.
+ * - Iterates over `features` to render feature items with icon, title, and description.
+ * - Provides a responsive layout with overlayed content positioned on larger screens.
+ *
+ * Props: none (imports assets and features directly).
+ *
+ * Returns: JSX element containing responsive banner images and an overlaid list of features.
+ */
 const BottomBanner = () => {
   return (
     <div className="relative mt-4">
