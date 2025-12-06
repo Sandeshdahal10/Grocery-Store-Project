@@ -1,6 +1,22 @@
 import React from "react";
 import { useAppContext } from "../context/AppContext";
 
+/**
+ * Login
+ *
+ * Functional React component that renders a modal for user login and registration.
+ *
+ * Behavior:
+ * - Maintains local state to toggle between "login" and "register" views and to store
+ *   form inputs (name, email, password).
+ * - Uses AppContext (setShowUserLogin, setUser) to update global user state and to
+ *   close the modal after successful submission.
+ * - onSubmitHandler currently sets a mock user and closes the modal.
+ *
+ * Props: none (consumes context directly).
+ *
+ * Returns: JSX modal containing a form for login or registration.
+ */
 const Login = () => {
   const [state, setState] = React.useState("login");
   const [name, setName] = React.useState("");
