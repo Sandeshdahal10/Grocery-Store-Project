@@ -1,14 +1,45 @@
 import React from "react";
 import { assets } from "../assets/assets";
 import { useAppContext } from "../context/AppContext";
+
+/**
+ * ProductCard
+ *
+ * Functional React component that renders a single product tile.
+ *
+ * Behavior:
+ * - Accepts a `product` prop and reads app context for currency, cart actions and navigation.
+ * - Clicking the card navigates to the product detail page and scrolls to top.
+ * - Shows image, category, name, rating visuals, price/offer price and cart add/remove controls.
+ *
+ * Props:
+ * - product: object {
+ *     _id: string,
+ *     name: string,
+ *     category: string,
+ *     image: string[],
+ *     price: number,
+ *     offerPrice: number,
+ *     ...
+ *   }
+ *
+ * Returns: JSX element for displaying a product card with interactive cart controls.
+ */
 const ProductCard = ({ product }) => {
-  
   const { currency, addToCart, removeFromCart, cartItems, navigate } =
     useAppContext();
 
   return (
     product && (
-      <div onClick={()=> {navigate(`/products/${product.category.toLowerCase()}/${product._id}`); scrollTo(0,0)}} className="border border-gray-500/20 rounded-md md:px-4 px-3 py-2 bg-white  w-full">
+      <div
+        onClick={() => {
+          navigate(
+            `/products/${product.category.toLowerCase()}/${product._id}`
+          );
+          scrollTo(0, 0);
+        }}
+        className="border border-gray-500/20 rounded-md md:px-4 px-3 py-2 bg-white  w-full"
+      >
         <div className="group cursor-pointer flex items-center justify-center px-2">
           <img
             className="group-hover:scale-105 transition max-w-26 md:max-w-36"
@@ -36,9 +67,11 @@ const ProductCard = ({ product }) => {
           </div>
           <div className="flex items-end justify-between mt-3">
             <p className="md:text-xl text-base font-medium text-primary">
-              {currency}{product.offerPrice}{" "}
+              {currency}
+              {product.offerPrice}{" "}
               <span className="text-gray-500/60 md:text-sm text-xs line-through">
-                {currency}{product.price}
+                {currency}
+                {product.price}
               </span>
             </p>
             <div onClick={(e) => e.stopPropagation()} className="text-primary">
@@ -53,7 +86,9 @@ const ProductCard = ({ product }) => {
               ) : (
                 <div className="flex items-center justify-center gap-2 md:w-20 w-16 h-[34px] bg-indigo-500/25 rounded select-none">
                   <button
-                    onClick={() => {removeFromCart(product._id)}}
+                    onClick={() => {
+                      removeFromCart(product._id);
+                    }}
                     className="cursor-pointer text-md px-2 h-full"
                   >
                     -
@@ -62,7 +97,9 @@ const ProductCard = ({ product }) => {
                     {cartItems[product._id]}
                   </span>
                   <button
-                    onClick={() => {addToCart(product._id)}}
+                    onClick={() => {
+                      addToCart(product._id);
+                    }}
                     className="cursor-pointer text-md px-2 h-full"
                   >
                     +
