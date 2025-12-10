@@ -3,29 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { dummyProducts } from "../assets/assets";
 import toast from "react-hot-toast";
 
-/**
- * AppContextProvider
- *
- * Provides application-wide state and actions via React Context.
- *
- * Exposes:
- * - navigate: function (from react-router) for navigation
- * - user, setUser: authenticated user state
- * - isSeller, setIsSeller: seller flag
- * - showUserLogin, setShowUserLogin: UI modal state for login
- * - products: product list (initialized from dummyProducts)
- * - currency: currency symbol from env
- * - addToCart(itemId): increments quantity for itemId in cart
- * - updateCartItems(itemId, quantity): set explicit quantity for itemId
- * - removeFromCart(itemId): decrements/removes item from cart
- * - cartItems: map of itemId => quantity
- * - searchQuery, setSearchQuery: search state
- *
- * Usage:
- * Wrap <AppContextProvider> around your app root and consume with `useAppContext()`.
- *
- * Returns: AppContext.Provider with the value object containing state & actions.
- */
+export const AppContext = createContext();
+
 export const AppContextProvider = ({ children }) => {
   const currency = import.meta.env.VITE_CURRENCY;
   const navigate = useNavigate();
@@ -95,18 +74,11 @@ export const AppContextProvider = ({ children }) => {
     removeFromCart,
     cartItems,
     searchQuery,
-    setSearchQuery,
+    setSearchQuery
   };
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };
 
-/**
- * useAppContext
- *
- * Convenience hook to access AppContext values.
- *
- * Returns: context value object provided by AppContextProvider.
- */
 export const useAppContext = () => {
   return useContext(AppContext);
 };
